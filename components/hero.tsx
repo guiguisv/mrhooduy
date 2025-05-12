@@ -9,14 +9,10 @@ import { VideoPlayer } from "./video-player"
 export function Hero() {
   const { language, contactInfo } = useCountry()
 
-  const formatPhoneForWhatsApp = (phone: string) => {
-    return phone.replace(/\+/g, "").replace(/\s/g, "")
-  }
-
+  // Update the openWhatsApp function to use the Uruguay phone number
   const openWhatsApp = () => {
-    if (contactInfo.whatsapp) {
-      window.open(`https://wa.me/${formatPhoneForWhatsApp(contactInfo.whatsapp)}`, "_blank")
-    }
+    // Use the Uruguay phone number directly
+    window.open("https://wa.me/59892696828", "_blank")
   }
 
   const container = {

@@ -34,89 +34,46 @@ export function Clients() {
     }
   }, [])
 
+  // Updated clients array with the new logos
   const clients = [
     {
-      name: "Mercado Bazar La Plata",
-      logo: "/images/mercado-bazar.png",
+      name: "Piso 40 Restaurant",
+      logo: "/images/piso40.png",
     },
     {
-      name: "Mostaza",
-      logo: "/images/mostaza.png",
+      name: "Vie",
+      logo: "/images/vie.jpeg",
     },
     {
-      name: "Yacht Club Olivos",
-      logo: "/images/yacht-club-olivos.png",
+      name: "Tsunami",
+      logo: "/images/tsunami.jpeg",
     },
     {
-      name: "Piegari Ristorante",
-      logo: "/images/piegari.png",
+      name: "Antonino Ristorante",
+      logo: "/images/antonino.png",
     },
     {
-      name: "Mi Gusto",
-      logo: "/images/mi-gusto.png",
+      name: "La Piccolina",
+      logo: "/images/piccolina.jpeg",
     },
     {
-      name: "Wyndham Hotels & Resorts",
-      logo: "/images/wyndham.png",
-    },
-    {
-      name: "Highland Park Country Club",
-      logo: "/images/highland-park.jpeg",
-    },
-    {
-      name: "Sushi Pop",
-      logo: "/images/sushi-pop.png",
-    },
-    {
-      name: "Hilton",
-      logo: "/images/hilton.jpeg",
-    },
-    {
-      name: "Howard Johnson",
-      logo: "/images/howard-johnson.png",
-    },
-    {
-      name: "La Parolaccia",
-      logo: "/images/la-parolaccia.png",
-    },
-    {
-      name: "Fabric Sushi",
-      logo: "/images/fabric-sushi.jpeg",
-    },
-    {
-      name: "La Cabrera",
-      logo: "/images/la-cabrera.png",
-    },
-    {
-      name: "La Bistecca Pasta Grill",
-      logo: "/images/la-bistecca.png",
-    },
-    {
-      name: "Alvear Palace Hotels & Residences",
-      logo: "/images/alvear-palace.png",
-    },
-    {
-      name: "Banco Galicia",
-      logo: "/images/banco-galicia.png",
-    },
-    {
-      name: "McDonald's",
-      logo: "/images/mcdonalds-logo.png",
-    },
-    {
-      name: "Galerías Pacífico",
-      logo: "/images/galerias-pacifico.png",
+      name: "Chillout Resto",
+      logo: "/images/chillout.png",
     },
     {
       name: "Banco Santander",
-      logo: "/images/santander-logo.png",
+      logo: "/images/santander-new.png",
+    },
+    {
+      name: "Shark Club",
+      logo: "/images/sharkclub.png",
     },
   ]
 
-  // Ajustar número de items por slide según el tamaño de pantalla
+  // Updated to show 3 items per slide on mobile
   const getItemsPerSlide = () => {
-    if (isMobile) return 1
-    if (isTablet) return 2
+    if (isMobile) return 3
+    if (isTablet) return 3
     return 4 // Desktop
   }
 
@@ -149,15 +106,15 @@ export function Clients() {
   const handleMouseEnter = () => setAutoplay(false)
   const handleMouseLeave = () => setAutoplay(true)
 
-  // Determinar el ancho de cada logo según el número de items por slide
+  // Updated to handle 3 items per slide on mobile
   const getLogoWidth = () => {
     switch (itemsPerSlide) {
-      case 1:
-        return "w-full"
-      case 2:
-        return "w-1/2"
-      default:
+      case 3:
+        return "w-1/3"
+      case 4:
         return "w-1/4"
+      default:
+        return "w-1/3"
     }
   }
 
@@ -175,7 +132,7 @@ export function Clients() {
         </motion.h2>
 
         <motion.div
-          className="relative max-w-6xl mx-auto px-10"
+          className="relative max-w-6xl mx-auto px-6 sm:px-10"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -188,7 +145,7 @@ export function Clients() {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-                <div key={slideIndex} className="min-w-full flex justify-center gap-4 md:gap-6">
+                <div key={slideIndex} className="min-w-full flex justify-center gap-2 sm:gap-4 md:gap-6">
                   {clients.slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide).map((client, index) => (
                     <motion.div
                       key={index}
@@ -198,12 +155,12 @@ export function Clients() {
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       whileHover={{ scale: 1.1 }}
                     >
-                      <div className="h-24 w-full max-w-[160px] relative flex items-center justify-center filter grayscale hover:grayscale-0 transition-all duration-300">
+                      <div className="h-16 sm:h-20 md:h-24 w-full max-w-[100px] sm:max-w-[120px] md:max-w-[160px] relative flex items-center justify-center filter grayscale hover:grayscale-0 transition-all duration-300">
                         <Image
                           src={client.logo || "/placeholder.svg"}
                           alt={client.name}
                           fill
-                          sizes="(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 25vw"
+                          sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 25vw"
                           style={{ objectFit: "contain" }}
                         />
                       </div>
@@ -214,25 +171,25 @@ export function Clients() {
             </div>
           </div>
 
-          {/* Navigation arrows */}
+          {/* Navigation arrows - made smaller on mobile */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow-md z-10"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="h-6 w-6 text-gray-700" />
+            <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-gray-700" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow-md z-10"
             aria-label="Next slide"
           >
-            <ChevronRight className="h-6 w-6 text-gray-700" />
+            <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-gray-700" />
           </button>
 
           {/* Dots indicator */}
-          <div className="flex justify-center mt-8 gap-2 flex-wrap">
+          <div className="flex justify-center mt-6 sm:mt-8 gap-2 flex-wrap">
             {Array.from({ length: totalSlides }).map((_, index) => (
               <button
                 key={index}

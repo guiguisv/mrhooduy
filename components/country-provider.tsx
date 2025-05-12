@@ -42,7 +42,7 @@ const defaultContactInfo = {
   uruguay: {
     phone: "+598 92 696 828",
     email: "ventas@limpiezadecampanas.com.uy",
-    address: "Uruguay",
+    address: "Constituyente 1555, 11200 Montevideo, Departamento de Montevideo",
     whatsapp: "+598 92 696 828",
   },
   usa: {

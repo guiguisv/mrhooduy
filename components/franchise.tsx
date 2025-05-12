@@ -28,18 +28,14 @@ export function Franchise() {
     },
   ]
 
-  const formatPhoneForWhatsApp = (phone: string) => {
-    return phone.replace(/\+/g, "").replace(/\s/g, "")
-  }
-
+  // Update the openWhatsApp function to use the Uruguay phone number
   const openWhatsApp = () => {
-    if (contactInfo.whatsapp) {
-      // Trigger conversion event for WhatsApp
-      if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "conversion", { send_to: "AW-16466325038/zBc-CJXvk5QZEK7c4Ks9" })
-      }
-      window.open(`https://wa.me/${formatPhoneForWhatsApp(contactInfo.whatsapp)}`, "_blank")
+    // Trigger conversion event for WhatsApp
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "conversion", { send_to: "AW-16466325038/zBc-CJXvk5QZEK7c4Ks9" })
     }
+    // Use the Uruguay phone number directly
+    window.open("https://wa.me/59892696828", "_blank")
   }
 
   const container = {

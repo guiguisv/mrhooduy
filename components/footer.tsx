@@ -23,7 +23,7 @@ export function Footer() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <Image src="/images/mrhoodlogo.png" alt="MR HOOD" width={60} height={60} className="h-16 w-auto" />
+            <Image src="/images/mrhoodlogo.png" alt="MR HOOD" width={80} height={80} className="h-20 w-auto" />
           </motion.div>
 
           <p className="text-gray-400 mb-8 max-w-2xl">

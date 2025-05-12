@@ -16,13 +16,14 @@ export function ContactSection() {
     return phone.replace(/\+/g, "").replace(/\s/g, "")
   }
 
+  // Update the openWhatsApp function to use the specific URL
   const openWhatsApp = () => {
     if (contactInfo.whatsapp) {
       // Trigger conversion event for WhatsApp
       if (typeof window !== "undefined" && window.gtag) {
         window.gtag("event", "conversion", { send_to: "AW-16466325038/zBc-CJXvk5QZEK7c4Ks9" })
       }
-      window.open(`https://wa.me/${formatPhoneForWhatsApp(contactInfo.whatsapp)}`, "_blank")
+      window.open("https://web.whatsapp.com/send?l=en&phone=+59892696828", "_blank")
     }
   }
 
@@ -71,46 +72,49 @@ export function ContactSection() {
               initial="hidden"
               animate={inView ? "show" : "hidden"}
             >
+              {/* Update the address section with the new address and Google Maps link */}
               <motion.div className="flex items-start" variants={item} whileHover={{ x: 5 }}>
                 <MapPin className="h-6 w-6 text-[#ccb699] mr-4 mt-1" />
                 <div>
                   <h4 className="font-semibold mb-1">{language === "es" ? "Dirección" : "Address"}</h4>
                   <a
-                    href="https://www.google.com/maps/place/Avenida+Olaz%C3%A1bal,+Villa+Urquiza,+Buenos+Aires,+Argentina"
+                    href="https://www.google.com/maps/place/Constituyente+1555,+11200+Montevideo,+Departamento+de+Montevideo,+Uruguay"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-300 hover:text-[#ccb699] transition-colors flex items-center"
                   >
-                    <span>Av. Olazábal, Villa Urquiza, Buenos Aires</span>
+                    <span>Constituyente 1555, 11200 Montevideo, Departamento de Montevideo</span>
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </div>
               </motion.div>
 
+              {/* Update the phone section with the new phone number */}
               <motion.div className="flex items-start" variants={item} whileHover={{ x: 5 }}>
                 <Phone className="h-6 w-6 text-[#ccb699] mr-4 mt-1" />
                 <div>
                   <h4 className="font-semibold mb-1">{language === "es" ? "Teléfono" : "Phone"}</h4>
                   <a
-                    href={`https://wa.me/${formatPhoneForWhatsApp(contactInfo.phone)}`}
+                    href="tel:+59892696828"
                     className="text-gray-300 hover:text-[#ccb699] transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {contactInfo.phone}
+                    +598 92 696 828
                   </a>
                 </div>
               </motion.div>
 
+              {/* Update the email section with the new email address */}
               <motion.div className="flex items-start" variants={item} whileHover={{ x: 5 }}>
                 <Mail className="h-6 w-6 text-[#ccb699] mr-4 mt-1" />
                 <div>
                   <h4 className="font-semibold mb-1">{language === "es" ? "Correo Electrónico" : "Email"}</h4>
                   <a
-                    href={`mailto:${contactInfo.email}`}
+                    href="mailto:ventas@limpiezadecampanas.com.uy"
                     className="text-gray-300 hover:text-[#ccb699] transition-colors"
                   >
-                    {contactInfo.email}
+                    ventas@limpiezadecampanas.com.uy
                   </a>
                 </div>
               </motion.div>

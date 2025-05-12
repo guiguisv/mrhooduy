@@ -6,14 +6,14 @@ import { motion } from "framer-motion"
 export function WhatsAppButton() {
   const { contactInfo } = useCountry()
 
+  // Update the openWhatsApp function to use the Uruguay phone number
   const openWhatsApp = () => {
-    if (contactInfo.whatsapp) {
-      // Trigger conversion event for WhatsApp
-      if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "conversion", { send_to: "AW-16466325038/zBc-CJXvk5QZEK7c4Ks9" })
-      }
-      window.open(`https://wa.me/${contactInfo.whatsapp.replace(/\+/g, "").replace(/\s/g, "")}`, "_blank")
+    // Trigger conversion event for WhatsApp
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "conversion", { send_to: "AW-16466325038/zBc-CJXvk5QZEK7c4Ks9" })
     }
+    // Use the Uruguay phone number directly
+    window.open("https://wa.me/59892696828", "_blank")
   }
 
   return (
@@ -21,7 +21,6 @@ export function WhatsAppButton() {
       onClick={openWhatsApp}
       className="fixed bottom-6 right-6 p-3 rounded-full bg-black text-white shadow-lg z-50 hover:bg-gray-800 transition-colors"
       aria-label="Contact via WhatsApp"
-      style={{ display: contactInfo.whatsapp ? "block" : "none" }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 1, type: "spring", stiffness: 400, damping: 10 }}
