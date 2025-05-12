@@ -131,3 +131,51 @@ iframe.youtube-vertical-video {
     padding: 4px;
   }
 }
+
+/* Animaciones para el carrusel */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.carousel-slide-enter {
+  animation: slideIn 0.7s ease-out forwards;
+}
+
+.carousel-slide-exit {
+  animation: slideOut 0.7s ease-out forwards;
+}
+
+/* Efecto de pulso para los indicadores de carrusel activos */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.carousel-indicator-active {
+  animation: pulse 2s infinite;
+}
