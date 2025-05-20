@@ -3,8 +3,6 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
-    formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
   },
   trailingSlash: true,
   eslint: {
@@ -14,7 +12,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   experimental: {
-    optimizeCss: true,
+    // Removed optimizeCss: true that was causing the error
     optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
   compiler: {
