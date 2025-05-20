@@ -15,8 +15,8 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-black text-white py-12">
-      <div className="container mx-auto px-4">
+    <footer className="bg-black text-white dark:bg-black">
+      <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col items-center justify-center text-center">
           <motion.div
             className="mb-8"

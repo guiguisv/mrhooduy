@@ -19,7 +19,7 @@ export function WhatsAppButton() {
   return (
     <motion.button
       onClick={openWhatsApp}
-      className="fixed bottom-6 right-6 p-3 rounded-full bg-black text-white shadow-lg z-50 hover:bg-gray-800 transition-colors"
+      className="fixed bottom-6 right-6 p-3 rounded-full bg-black text-white shadow-lg z-50 hover:bg-[#333333] transition-colors dark:bg-[#333333] dark:hover:bg-[#444444]"
       aria-label="Contact via WhatsApp"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}

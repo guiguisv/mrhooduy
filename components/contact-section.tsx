@@ -43,7 +43,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contacto" className="py-20 bg-[#222222] text-white">
+    <section id="contacto" className="py-20 bg-[#222222] text-white dark:bg-[#1a1a1a]">
       <div className="container mx-auto px-4">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-12"
@@ -61,7 +61,7 @@ export function ContactSection() {
           initial="hidden"
           animate={inView ? "show" : "hidden"}
         >
-          <motion.div variants={item} className="bg-[#2a2a2a] rounded-xl p-8 mb-10">
+          <motion.div variants={item} className="bg-[#2a2a2a] dark:bg-[#2a2a2a] rounded-xl p-8 mb-10">
             <h3 className="text-2xl font-bold mb-8 border-b border-[#ccb699] pb-2 inline-block">
               {language === "es" ? "Información de Contacto" : "Contact Information"}
             </h3>
@@ -124,7 +124,7 @@ export function ContactSection() {
           <motion.div variants={item} className="text-center" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button
               onClick={openWhatsApp}
-              className="bg-black hover:bg-gray-800 text-white font-medium px-8 py-6 text-xl w-full md:w-auto md:min-w-[300px] rounded-lg flex items-center justify-center border border-[#ccb699]"
+              className="bg-[#1a1a1a] hover:bg-[#333333] text-white font-medium px-8 py-6 text-xl w-full md:w-auto md:min-w-[300px] rounded-lg flex items-center justify-center border border-[#ccb699] dark:bg-[#333333] dark:hover:bg-[#444444]"
             >
               {language === "es" ? "SOLICITAR PRESUPUESTO" : "REQUEST A QUOTE"}
               <Send className="ml-2 h-5 w-5" />

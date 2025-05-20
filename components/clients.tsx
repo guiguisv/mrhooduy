@@ -172,7 +172,7 @@ export function Clients() {
   }
 
   return (
-    <section id="clientes" className="py-20 bg-white">
+    <section id="clientes" className="py-20 bg-white dark:bg-[#1a1a1a]">
       <div className="container mx-auto px-4">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-12"
@@ -207,13 +207,13 @@ export function Clients() {
                   {clients.slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide).map((client, index) => (
                     <motion.div
                       key={index}
-                      className={`flex justify-center ${getLogoWidth()}`}
+                      className={`flex justify-center ${getLogoWidth()} client-logo-container`}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       whileHover={{ scale: 1.1 }}
                     >
-                      <div className="h-16 sm:h-20 md:h-24 w-full max-w-[100px] sm:max-w-[120px] md:max-w-[160px] relative flex items-center justify-center filter grayscale hover:grayscale-0 transition-all duration-300 bg-white/50 p-2 rounded-lg">
+                      <div className="h-16 sm:h-20 md:h-24 w-full max-w-[100px] sm:max-w-[120px] md:max-w-[160px] relative flex items-center justify-center filter grayscale hover:grayscale-0 transition-all duration-300 bg-white/50 dark:bg-[#2a2a2a]/50 p-2 rounded-lg">
                         <Image
                           src={client.logo || "/placeholder.svg"}
                           alt={client.name}
@@ -237,10 +237,10 @@ export function Clients() {
               setAutoplay(false)
               setTimeout(() => setAutoplay(true), 5000) // Resume autoplay after 5 seconds
             }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow-md z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-[#2a2a2a]/80 hover:bg-white dark:hover:bg-[#2a2a2a] rounded-full p-1 sm:p-2 shadow-md z-10"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-gray-700" />
+            <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-gray-700 dark:text-gray-200" />
           </button>
 
           <button
@@ -249,10 +249,10 @@ export function Clients() {
               setAutoplay(false)
               setTimeout(() => setAutoplay(true), 5000) // Resume autoplay after 5 seconds
             }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow-md z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-[#2a2a2a]/80 hover:bg-white dark:hover:bg-[#2a2a2a] rounded-full p-1 sm:p-2 shadow-md z-10"
             aria-label="Next slide"
           >
-            <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-gray-700" />
+            <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-gray-700 dark:text-gray-200" />
           </button>
 
           {/* Dots indicator */}
@@ -266,7 +266,7 @@ export function Clients() {
                   setTimeout(() => setAutoplay(true), 5000) // Resume autoplay after 5 seconds
                 }}
                 className={`h-2 rounded-full transition-all ${
-                  currentSlide === index ? "w-6 bg-[#ccb699]" : "w-2 bg-gray-300"
+                  currentSlide === index ? "w-6 bg-[#ccb699]" : "w-2 bg-gray-300 dark:bg-[#444444]"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

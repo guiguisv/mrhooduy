@@ -52,10 +52,10 @@ const defaultContactInfo = {
     whatsapp: "",
   },
   unknown: {
-    phone: "+5411 2657 5200",
-    email: "mrhood.ventas@hotmail.com",
-    address: "Olazabal 4889 - Villa Urquiza",
-    whatsapp: "+5411 2657 5200",
+    phone: "+598 92 696 828",
+    email: "ventas@limpiezadecampanas.com.uy",
+    address: "Constituyente 1555, 11200 Montevideo, Departamento de Montevideo",
+    whatsapp: "+598 92 696 828",
   },
 }
 
@@ -80,9 +80,9 @@ export function CountryProvider({ children }: { children: React.ReactNode }) {
         // const response = await fetch('https://api.ipgeolocation.io/ipgeo?apiKey=YOUR_API_KEY')
         // const data = await response.json()
 
-        // For demo, we'll just default to Argentina
+        // For demo, we'll just default to Uruguay
         // In production, you would use data.country_code to determine the country
-        const detectedCountry: Country = "argentina"
+        const detectedCountry: Country = "uruguay"
         setCountry(detectedCountry)
         setContactInfo(defaultContactInfo[detectedCountry])
 
@@ -90,9 +90,9 @@ export function CountryProvider({ children }: { children: React.ReactNode }) {
         setLanguage(detectedCountry === "usa" ? "en" : "es")
       } catch (error) {
         console.error("Error detecting country:", error)
-        // Default to Argentina if detection fails
-        setCountry("argentina")
-        setContactInfo(defaultContactInfo.argentina)
+        // Default to Uruguay if detection fails
+        setCountry("uruguay")
+        setContactInfo(defaultContactInfo.uruguay)
       }
     }
 

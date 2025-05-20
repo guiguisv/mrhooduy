@@ -27,21 +27,21 @@
 
 .dark {
   --background: 0 0% 10%;
-  --foreground: 0 0% 100%;
-  --card: 0 0% 10%;
-  --card-foreground: 0 0% 100%;
-  --popover: 0 0% 10%;
-  --popover-foreground: 0 0% 100%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 12%;
+  --card-foreground: 0 0% 95%;
+  --popover: 0 0% 12%;
+  --popover-foreground: 0 0% 95%;
   --primary: 35 33% 70%;
   --primary-foreground: 0 0% 10%;
   --secondary: 0 0% 15%;
-  --secondary-foreground: 0 0% 100%;
+  --secondary-foreground: 0 0% 95%;
   --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 65%;
+  --muted-foreground: 0 0% 70%;
   --accent: 0 0% 15%;
-  --accent-foreground: 0 0% 100%;
+  --accent-foreground: 0 0% 95%;
   --destructive: 0 63% 31%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: 0 0% 95%;
   --border: 0 0% 20%;
   --input: 0 0% 20%;
   --ring: 35 33% 70%;
@@ -178,4 +178,14 @@ iframe.youtube-vertical-video {
 
 .carousel-indicator-active {
   animation: pulse 2s infinite;
+}
+
+/* Dark mode specific styles */
+.dark .client-logo-container img {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.dark .client-logo-container:hover img {
+  filter: grayscale(0%);
 }

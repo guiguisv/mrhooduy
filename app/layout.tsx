@@ -49,6 +49,19 @@ export default function RootLayout({
             gtag('config', 'AW-16466325038');
           `}
         </Script>
+
+        {/* Script to set theme based on device preference */}
+        <Script id="theme-detector" strategy="beforeInteractive">
+          {`
+            (function() {
+              try {
+                const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.classList.toggle('dark', isDarkMode);
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+              } catch (e) {}
+            })();
+          `}
+        </Script>
       </head>
       <body className={inter.className}>
         {/* Google Tag Manager (noscript) */}
@@ -61,9 +74,7 @@ export default function RootLayout({
           ></iframe>
         </noscript>
 
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

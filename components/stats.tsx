@@ -96,7 +96,7 @@ export function Stats() {
   }
 
   return (
-    <section className="py-20 bg-[#222222] text-white">
+    <section className="py-20 bg-[#222222] text-white dark:bg-[#222222]">
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -108,7 +108,7 @@ export function Stats() {
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="p-8 bg-[#2a2a2a] rounded-2xl shadow-md hover:shadow-lg transition-shadow text-center min-h-[200px] flex flex-col justify-center"
+              className="p-8 bg-[#2a2a2a] dark:bg-[#2a2a2a] rounded-2xl shadow-md hover:shadow-lg transition-shadow text-center min-h-[200px] flex flex-col justify-center"
               variants={item}
               whileHover={{ y: -5 }}
               transition={{ type: "spring", stiffness: 300 }}

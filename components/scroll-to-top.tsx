@@ -32,7 +32,7 @@ export function ScrollToTop() {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-6 left-6 p-3 rounded-full bg-black text-white shadow-lg z-50 hover:bg-gray-800"
+          className="fixed bottom-6 left-6 p-3 rounded-full bg-black text-white shadow-lg z-50 hover:bg-[#333333] dark:bg-[#333333] dark:hover:bg-[#444444]"
           aria-label="Scroll to top"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
