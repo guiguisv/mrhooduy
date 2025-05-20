@@ -5,7 +5,13 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
 
-const inter = Inter({ subsets: ["latin"] })
+// Optimize font loading
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  variable: "--font-inter",
+})
 
 export const metadata: Metadata = {
   title: "MR HOOD - Limpieza Profesional de Campanas",
@@ -24,12 +30,29 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning className={inter.variable}>
       <head>
         <link rel="icon" href="/images/mrhoodlogo.png" sizes="any" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+        <meta name="theme-color" content="#1a1a1a" />
 
-        {/* Google Tag Manager */}
-        <Script id="google-tag-manager" strategy="afterInteractive">
+        {/* Script to set theme based on device preference - moved to inline for faster execution */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  document.documentElement.classList.toggle('dark', isDarkMode);
+                  localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+
+        {/* Google Tag Manager - load with low priority */}
+        <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -39,27 +62,14 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Google tag (gtag.js) */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-16466325038" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
+        {/* Google tag (gtag.js) - load with low priority */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-16466325038" strategy="lazyOnload" />
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-16466325038');
-          `}
-        </Script>
-
-        {/* Script to set theme based on device preference */}
-        <Script id="theme-detector" strategy="beforeInteractive">
-          {`
-            (function() {
-              try {
-                const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                document.documentElement.classList.toggle('dark', isDarkMode);
-                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-              } catch (e) {}
-            })();
           `}
         </Script>
       </head>

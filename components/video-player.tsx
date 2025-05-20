@@ -11,8 +11,33 @@ interface VideoPlayerProps {
 export function VideoPlayer({ videoId, className = "w-full h-full" }: VideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isIntersecting, setIsIntersecting] = useState(false)
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
+    // Create an intersection observer to only load the video when it's visible
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries
+        setIsIntersecting(entry.isIntersecting)
+      },
+      { threshold: 0.1 },
+    )
+
+    if (containerRef.current) {
+      observerRef.current.observe(containerRef.current)
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isIntersecting) return
+
     // Create a custom YouTube player with specific parameters
     const loadYouTubePlayer = () => {
       // Create a script element to load the YouTube IFrame API
@@ -33,7 +58,7 @@ export function VideoPlayer({ videoId, className = "w-full h-full" }: VideoPlaye
         playerDiv.id = `youtube-player-${videoId}`
         containerRef.current.appendChild(playerDiv)
 
-        // Create the player
+        // Create the player with optimized settings
         new window.YT.Player(playerDiv.id, {
           videoId: videoId,
           playerVars: {
@@ -48,6 +73,8 @@ export function VideoPlayer({ videoId, className = "w-full h-full" }: VideoPlaye
             playsinline: 1,
             playlist: videoId,
             origin: window.location.origin,
+            enablejsapi: 1,
+            widget_referrer: window.location.href,
           },
           events: {
             onReady: (event) => {
@@ -84,7 +111,7 @@ export function VideoPlayer({ videoId, className = "w-full h-full" }: VideoPlaye
       // Clean up
       window.onYouTubeIframeAPIReady = null
     }
-  }, [videoId])
+  }, [videoId, isIntersecting])
 
   return (
     <motion.div
@@ -97,3 +124,5 @@ export function VideoPlayer({ videoId, className = "w-full h-full" }: VideoPlaye
     </motion.div>
   )
 }
+
+export default VideoPlayer

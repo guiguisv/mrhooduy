@@ -1,20 +1,31 @@
+import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { Stats } from "@/components/stats"
-import { WhyChooseUs } from "@/components/why-choose-us"
-import { HowWeDoIt } from "@/components/how-we-do-it"
-import { Clients } from "@/components/clients"
-import { Franchise } from "@/components/franchise"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
-import { ScrollToTop } from "@/components/scroll-to-top"
-import { WhatsAppButton } from "@/components/whatsapp-button"
 import { CountryProvider } from "@/components/country-provider"
+import { ClientWrapper } from "@/components/client-wrapper"
+
+// Dynamically import components that are below the fold
+const WhyChooseUs = dynamic(() => import("@/components/why-choose-us").then((mod) => ({ default: mod.WhyChooseUs })), {
+  ssr: true,
+})
+const HowWeDoIt = dynamic(() => import("@/components/how-we-do-it").then((mod) => ({ default: mod.HowWeDoIt })), {
+  ssr: true,
+})
+const Clients = dynamic(() => import("@/components/clients").then((mod) => ({ default: mod.Clients })), { ssr: true })
+const Franchise = dynamic(() => import("@/components/franchise").then((mod) => ({ default: mod.Franchise })), {
+  ssr: true,
+})
+const ContactSection = dynamic(
+  () => import("@/components/contact-section").then((mod) => ({ default: mod.ContactSection })),
+  { ssr: true },
+)
+const Footer = dynamic(() => import("@/components/footer").then((mod) => ({ default: mod.Footer })), { ssr: true })
 
 export default function Home() {
   return (
     <CountryProvider>
-      <div className="relative">
+      <ClientWrapper>
         <Header />
         <main>
           <Hero />
@@ -26,9 +37,7 @@ export default function Home() {
           <ContactSection />
         </main>
         <Footer />
-        <ScrollToTop />
-        <WhatsAppButton />
-      </div>
+      </ClientWrapper>
     </CountryProvider>
   )
 }

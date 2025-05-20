@@ -58,7 +58,14 @@ export function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
             <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
-              <Image src="/images/mrhoodlogo.png" alt="MR HOOD" width={50} height={50} className="h-12 w-auto" />
+              <Image
+                src="/images/mrhoodlogo.png"
+                alt="MR HOOD"
+                width={50}
+                height={50}
+                className="h-12 w-auto"
+                priority
+              />
             </motion.div>
           </Link>
 
@@ -91,14 +98,20 @@ export function Header() {
             </motion.button>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden text-black dark:text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            whileTap={{ scale: 0.95 }}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
+          {/* Mobile Controls - Theme Toggle + Menu Button */}
+          <div className="md:hidden flex items-center space-x-4">
+            {/* Theme toggle next to menu button */}
+            <ThemeToggle />
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              className="text-black dark:text-white"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              whileTap={{ scale: 0.95 }}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </motion.button>
+          </div>
         </div>
       </div>
 
@@ -124,10 +137,7 @@ export function Header() {
             ))}
 
             <div className="flex items-center space-x-4">
-              {/* Theme toggle first */}
-              <ThemeToggle />
-
-              {/* Language toggle second */}
+              {/* Language toggle */}
               <motion.button
                 onClick={toggleLanguage}
                 className="px-3 py-2 border border-[#ccb699] rounded-full text-[#ccb699] hover:bg-[#ccb699] hover:text-black transition-colors"

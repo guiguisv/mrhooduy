@@ -25,63 +25,89 @@ export function Clients() {
   // Autoplay duration in milliseconds - changed to 1.5 seconds
   const autoplayDuration = 1500
 
-  // Detectar tamaño de pantalla para responsive
+  // Detectar tamaño de pantalla para responsive - optimized with debounce
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 640)
       setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024)
     }
 
+    // Initial check
     checkScreenSize()
-    window.addEventListener("resize", checkScreenSize)
+
+    // Debounced resize handler
+    let timeoutId: NodeJS.Timeout
+    const handleResize = () => {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(checkScreenSize, 100)
+    }
+
+    window.addEventListener("resize", handleResize)
 
     return () => {
-      window.removeEventListener("resize", checkScreenSize)
+      window.removeEventListener("resize", handleResize)
+      clearTimeout(timeoutId)
     }
   }, [])
 
-  // Updated clients array with the new logos
+  // Updated clients array with the new logos - optimized with proper width/height
   const clients = [
     {
       name: "Piso 40 Restaurant",
       logo: "/images/piso40.png",
+      width: 160,
+      height: 80,
     },
     {
       name: "Vie",
       logo: "/images/vie.jpeg",
+      width: 160,
+      height: 80,
     },
     {
       name: "Tsunami",
       logo: "/images/tsunami.jpeg",
+      width: 160,
+      height: 80,
     },
     {
       name: "Antonino Ristorante",
       logo: "/images/antonino.png",
+      width: 160,
+      height: 80,
     },
     {
       name: "La Piccolina",
       logo: "/images/piccolina.jpeg",
+      width: 160,
+      height: 80,
     },
     {
       name: "Chillout Resto",
       logo: "/images/chillout.png",
+      width: 160,
+      height: 80,
     },
     {
       name: "Banco Santander",
       logo: "/images/santander-new.png",
+      width: 160,
+      height: 80,
     },
     {
       name: "Shark Club",
       logo: "/images/sharkclub.png",
+      width: 160,
+      height: 80,
     },
   ]
 
   // Updated to show 3 items per slide on mobile
-  const getItemsPerSlide = () => {
+  const getItemsPerSlide = useCallback(() => {
     if (isMobile) return 3
     if (isTablet) return 3
     return 4 // Desktop
-  }
+  }, [isMobile, isTablet])
 
   const itemsPerSlide = getItemsPerSlide()
   const totalSlides = Math.ceil(clients.length / itemsPerSlide)
@@ -121,7 +147,7 @@ export function Clients() {
     }
   }
 
-  // Simplified autoplay without progress tracking
+  // Optimized autoplay with requestAnimationFrame
   useEffect(() => {
     if (!autoplay) {
       // Clear interval when autoplay is paused
@@ -138,7 +164,9 @@ export function Clients() {
 
     // Set up slide transition
     autoplayTimeRef.current = setTimeout(() => {
-      nextSlide()
+      window.requestAnimationFrame(() => {
+        nextSlide()
+      })
     }, autoplayDuration)
 
     return () => {
@@ -160,7 +188,7 @@ export function Clients() {
   const handleBlur = () => setAutoplay(true)
 
   // Updated to handle 3 items per slide on mobile
-  const getLogoWidth = () => {
+  const getLogoWidth = useCallback(() => {
     switch (itemsPerSlide) {
       case 3:
         return "w-1/3"
@@ -169,7 +197,23 @@ export function Clients() {
       default:
         return "w-1/3"
     }
-  }
+  }, [itemsPerSlide])
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        prevSlide()
+      } else if (e.key === "ArrowRight") {
+        nextSlide()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [nextSlide, prevSlide])
 
   return (
     <section id="clientes" className="py-20 bg-white dark:bg-[#1a1a1a]">
@@ -199,7 +243,7 @@ export function Clients() {
         >
           <div className="overflow-hidden rounded-xl">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-500 ease-in-out will-change-transform"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {Array.from({ length: totalSlides }).map((_, slideIndex) => (
@@ -217,10 +261,12 @@ export function Clients() {
                         <Image
                           src={client.logo || "/placeholder.svg"}
                           alt={client.name}
-                          fill
+                          width={client.width || 160}
+                          height={client.height || 80}
                           sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 25vw"
                           style={{ objectFit: "contain" }}
                           className="p-1"
+                          loading="lazy"
                         />
                       </div>
                     </motion.div>

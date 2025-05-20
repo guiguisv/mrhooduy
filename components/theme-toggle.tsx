@@ -21,7 +21,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-9 h-9 rounded-full border border-[#ccb699] flex items-center justify-center">
+      <div className="w-8 h-8 rounded-full border border-[#ccb699] flex items-center justify-center">
         <span className="sr-only">Toggle theme</span>
       </div>
     )
@@ -30,8 +30,7 @@ export function ThemeToggle() {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="w-9 h-9 rounded-full border border-[#ccb699] flex items-center justify-center"
-      whileHover={{ scale: 1.05 }}
+      className="w-8 h-8 rounded-full border border-[#ccb699] flex items-center justify-center"
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       aria-label="Toggle theme"

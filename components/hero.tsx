@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button"
 import { useCountry } from "./country-provider"
 import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
-import { VideoPlayer } from "./video-player"
+import { lazy, Suspense } from "react"
+
+// Lazy load the video player component
+const LazyVideoPlayer = lazy(() => import("./video-player").then((mod) => ({ default: mod.VideoPlayer })))
 
 export function Hero() {
-  const { language, contactInfo } = useCountry()
+  const { language } = useCountry()
 
   // Update the openWhatsApp function to use the Uruguay phone number
   const openWhatsApp = () => {
@@ -75,7 +78,9 @@ export function Hero() {
             >
               <div className="bg-gradient-to-br from-[#ccb699]/20 to-[#ccb699]/40 dark:from-[#333333] dark:to-[#444444] rounded-2xl p-6 flex items-center justify-center shadow-lg">
                 <div className="w-full max-w-[280px] mx-auto bg-[#222222]/80 dark:bg-[#111111]/80 backdrop-blur-sm rounded-xl flex items-center justify-center p-2 overflow-hidden">
-                  <VideoPlayer videoId="xT8qfeWlo3o" />
+                  <Suspense fallback={<div className="aspect-[9/16] w-full bg-gray-800 animate-pulse"></div>}>
+                    <LazyVideoPlayer videoId="xT8qfeWlo3o" />
+                  </Suspense>
                 </div>
               </div>
             </motion.div>
